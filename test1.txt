@@ -1,2 +1,9 @@
 hello
+<<<<<<< HEAD
 world
+=======
+<<<<<<< HEAD
+=======
+tommy
+>>>>>>> parent of 813ac2d... no message
+>>>>>>> d2c3005... reverse commit
