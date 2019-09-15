@@ -3,8 +3,8 @@ package lab1;
 import java.io.*;
 import java.net.*;
 
-public class getRequest {
-	public getRequest() {
+public class GetRequest {
+	public GetRequest() {
 		
 	}
 	

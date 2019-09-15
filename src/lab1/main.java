@@ -8,9 +8,37 @@ public class main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner scanner = new Scanner(System.in);
+
+		//boolean httpcCheck = false;
+		String param = scanner.nextLine();
+				
+		try 
+		{
+			ParmaReader parmaReader = new ParmaReader(param);
+			parmaReader.getRequest();
+		}catch(Exception e) {
+			 System.out.println("Something went wrong.");
+		}
 		
-		getRequest getRequest = new getRequest();
-		getRequest.sendRequest();
+		
+		
+//		
+//		String parma [] = scanner.nextLine().split(" ");
+//		
+//		for(int i=0;i<parma.length;i++) 
+//		{
+//			if(parma[0]!="httpc") 
+//			{
+//				httpcCheck = true;
+//			}
+//		}
+//		
+//		if(httpcCheck == true) 
+//		{
+//			//GetRequest getRequest = new GetRequest();
+//			//getRequest.sendRequest();	
+//		}
+		
 
 	}
 
