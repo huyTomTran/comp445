@@ -9,7 +9,8 @@ public class main {
 		// TODO Auto-generated method stub
 		Scanner scanner = new Scanner(System.in);
 
-		//boolean httpcCheck = false;
+		System.out.println("command");
+		
 		String param = scanner.nextLine();
 				
 		try 

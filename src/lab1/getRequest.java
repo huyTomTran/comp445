@@ -13,7 +13,7 @@ public class GetRequest {
 	
 	
 	
-	public void sendRequest () {
+	public void sendRequest (String srt) {
 		
 		try {
 			Socket socket = new Socket("www.google.com", 80);
