@@ -43,7 +43,6 @@ public class ParmaReader {
 				}
 			}
 			
-			System.out.println(isView);
 			/*
 			 processing
 			 */

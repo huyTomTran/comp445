@@ -13,15 +13,15 @@ public class GetRequest {
 	
 	
 	
-	public void sendRequest (String srt) {
+	public void sendRequest (String str) {
 		
 		try {
-			Socket socket = new Socket("www.google.com", 80);
+			Socket socket = new Socket(str, 80);
 			PrintWriter wtr = new PrintWriter(socket.getOutputStream());
 	        //Prints the request string to the output stream
 			
 			String get = "GET / HTTP/1.1";
-			String host = "Host: www.google.com";
+			String host = "Host: "+str;
 			
 	        //Create a server request			
 	        wtr.println(get);
@@ -41,9 +41,12 @@ public class GetRequest {
 	        //Prints each line of the response 
 	        while((outStr = bufRead.readLine()) != null){
 	            System.out.println(outStr);
+	            if(outStr.equals("0"))
+	            {
+	            	break;
+	            }
 	        }
-
-
+	        //System.out.println("train is big");
 	        //Closes out buffer and writer
 	        bufRead.close();
 	        wtr.close();
