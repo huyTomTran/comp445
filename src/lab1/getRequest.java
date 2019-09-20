@@ -3,20 +3,20 @@ package lab1;
 import java.io.*;
 import java.net.*;
 
+
+
 public class GetRequest {
 	public GetRequest() {
 		
 	}
 	
 	
-	
-	
-	
-	
 	public void sendRequest (String str) {
 		
 		try {
-			Socket socket = new Socket(str, 80);
+			Socket socket = new Socket("httpbin.org", 80);
+			
+
 			PrintWriter wtr = new PrintWriter(socket.getOutputStream());
 	        //Prints the request string to the output stream
 			
@@ -41,7 +41,7 @@ public class GetRequest {
 	        //Prints each line of the response 
 	        while((outStr = bufRead.readLine()) != null){
 	            System.out.println(outStr);
-	            if(outStr.equals("0"))
+	            if(outStr.equals("0")||outStr.equals("</body>"))
 	            {
 	            	break;
 	            }
@@ -51,8 +51,6 @@ public class GetRequest {
 	        bufRead.close();
 	        wtr.close();
 			
-			
-			
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -60,8 +58,6 @@ public class GetRequest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-	
 		
 		
 	}

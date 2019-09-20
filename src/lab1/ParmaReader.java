@@ -7,6 +7,7 @@ public class ParmaReader {
 	private String parma[];
 	private boolean isHttpcCheck = false;
 	private boolean isView = false;
+	private boolean isHelp = false;
 	private String URL;
 	private GetRequest getRequest;
 	
@@ -41,14 +42,48 @@ public class ParmaReader {
 				{
 					URL = parma[i];
 				}
+				if(parma[i].equals("help"))
+				{
+					int index = i;
+					int x = parma.length;
+					if(parma.length<=index+1) 
+					{
+						//System.out.println("just help");
+						isHelp = true;
+						Help.helpMenu();
+					}
+					else 
+					{
+						if(parma[index+1].equals("get"))
+						{
+							isHelp = true;
+							Help.getHelpMenu();
+						}
+						else if(parma[index+1].equals("post"))
+						{
+							System.out.println("help get");
+						}
+						else 
+						{
+							isHelp = true;
+							Help.postHelpMenu();
+						}
+						
+					}
+				}
+
 			}
 			
 			/*
 			 processing
 			 */
-			if(isHttpcCheck == true && URL != null && isView == true) 
+			if(isHttpcCheck == true && URL != null && isView == true && isHelp == false) 
 			{
-				getRequest.sendRequest(URL);	
+				//getRequest.sendRequest(URL); 
+			}
+			else if(isHelp == true)
+			{
+				isHelp = false;
 			}
 			else 
 			{
