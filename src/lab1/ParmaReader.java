@@ -73,6 +73,10 @@ public class ParmaReader {
 				if(parma[i].contains("http://")){
 					URL = parma[i];
 				}
+				if(parma[i].equals("-v"))
+				{
+					isView = true;
+				}
 			}
 			
 			/*
