@@ -8,6 +8,9 @@ public class ParmaReader {
 	private boolean isHttpcCheck = false;
 	private boolean isView = false;
 	private boolean isHelp = false;
+	private boolean hasKey = false;
+	private boolean isGet = false;
+	private boolean isPost = false;
 	private String URL;
 	private GetRequest getRequest;
 	
@@ -32,16 +35,7 @@ public class ParmaReader {
 				{
 					isHttpcCheck = true;
 				}
-				
-				if(parma[i].equals("-v"))
-				{
-					isView = true;
-					URL = parma[i+1];
-				}
-				else
-				{
-					URL = parma[i];
-				}
+	
 				if(parma[i].equals("help"))
 				{
 					int index = i;
@@ -59,27 +53,60 @@ public class ParmaReader {
 							isHelp = true;
 							Help.getHelpMenu();
 						}
-						else if(parma[index+1].equals("post"))
-						{
-							System.out.println("help get");
-						}
 						else 
 						{
 							isHelp = true;
 							Help.postHelpMenu();
 						}
-						
 					}
 				}
-
+				
+				if(parma[i].equals("get")) 
+				{
+					isGet = true;					
+				}
+				if(parma[i].equals("post")) 
+				{
+					isPost = true;					
+				}
+				
+				if(parma[i].contains("http://")){
+					URL = parma[i];
+				}
+				if(parma[i].equals("-v"))
+				{
+					isView = true;
+				}
 			}
 			
 			/*
 			 processing
 			 */
-			if(isHttpcCheck == true && URL != null && isView == true && isHelp == false) 
-			{
+			if(isHttpcCheck == true && isGet==true && isHelp == false && isPost == false) 
+			{					
+				String url = "";
+				String parmaa = "";
+				int temp =0;
+				for(int i =0 ; i < URL.length();i++) 
+				{
+					if(URL.charAt(i)=='?') {
+						temp = i;
+						url = URL.substring(0,temp);
+						parmaa = URL.substring(temp+1,URL.length());
+						break;
+					}
+					else 
+					{
+						url =URL;
+						parmaa = "";
+					}
+				}
+				getRequest._sendRequest(url,parmaa,isView); 
 				//getRequest.sendRequest(URL); 
+			}
+			else if(isHttpcCheck == true && isPost ==true && isHelp == false && isGet == false)
+			{
+				System.out.println("it's post");
 			}
 			else if(isHelp == true)
 			{
@@ -87,7 +114,7 @@ public class ParmaReader {
 			}
 			else 
 			{
-				System.out.println("Command line Error");
+				System.out.println("Command line Error or missing http");
 			}
 		}
 		
