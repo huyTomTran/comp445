@@ -2,6 +2,7 @@ package lab1;
 
 import java.io.*;
 import java.net.*;
+import java.util.*;
 
 
 
@@ -27,24 +28,33 @@ public class GetRequest {
 			System.out.println(url);
 			System.out.println(parma);
 			String str [] = parma.split("&");
+			Stack <String> stack = new Stack <String>();
 			for(String a : str) {
-				System.out.println(a);
+				stack.push(a);
 			}
 			
+			
+			System.out.println(
+			"{\n"
+			+"  \"arg\": {");	
+				while(!stack.empty())
+				{
+					String temp [] = stack.pop().split("=");
+					System.out.println("    \""+temp[0]+"\" : "+"\""+temp[1]+"\"");
+				}
+			System.out.println("  },");
 		}
-		
+		//delete http:// for socket
 		String tempURL = url.substring(7, url.length());
 		
-		System.out.println("tempURL"+tempURL);
 		try {
-			Socket socket = new Socket("www.google.com", 80);
+			Socket socket = new Socket(tempURL, 80);
 			
 
 			PrintWriter wtr = new PrintWriter(socket.getOutputStream());
 	        //Prints the request string to the output stream
-			
-			String get = "GET / HTTP/1.1";
-			String host = "Host: www.google.com";
+				String get = "GET / HTTP/1.1";
+				String host = "Host: "+tempURL;
 			
 			/*
 			 * 
@@ -53,16 +63,24 @@ public class GetRequest {
 			
 			
 			
-	        //Create a server request			
+	        //Create a server request	
 	        wtr.println(get);
 	        wtr.println(host);
 	        wtr.println("");
 	        wtr.flush();
 	        
 	        //observe the request on console
-	        System.out.println(get);
-	        System.out.println(host);
-	        System.out.println("");
+	        if(isView)
+	        {
+		        System.out.println(get);
+		        System.out.println(host);
+		        System.out.println("");
+	        }
+	        else
+	        {
+	        	System.out.println("\"headers\": {");
+	        	System.out.println("  "+host + "\n  },\n  \"url\": "+url+"?"+parma+"\n}");
+	        }
 
 	        //Creates a BufferedReader that contains the server response
 	        BufferedReader bufRead = new BufferedReader(new InputStreamReader(socket.getInputStream()));
