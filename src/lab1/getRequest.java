@@ -10,9 +10,6 @@ public class GetRequest {
 	private Socket socket;
 
 
-
-
-
 	public GetRequest() {
 		
 	}

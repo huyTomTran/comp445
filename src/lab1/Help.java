@@ -23,7 +23,7 @@ public class Help {
 				+ "\r\n"
 				+ "Get executes a HTTP GET request for a given URL"
 				+ "\r\n"
-				+ "\t -v		    Prints the detail of the response such as protocol, statusand headers.\n"
+				+ "\t -v		    Prints the detail of the response such as protocol, status and headers.\n"
 				+ "\t -h key:value	Associates headers to HTTP Request with the format 'key:value'.\n"
 				);
 		
@@ -36,7 +36,7 @@ public class Help {
 				+ "\r\n"
 				+ "httpc post [-v] [-h key:value] [-d inline-data] [-f file] URL\n"
 				+ "\r\n"
-				+ "\t -v			Prints the detail of the response such as protocol, statusand headers.\n"
+				+ "\t -v			Prints the detail of the response such as protocol, status and headers.\n"
 				+ "\t -h key:value	Associates headers to HTTP Request with the format 'key:value'.\n"
 				+ "\t -d string		Associates an inline data to the body HTTP POST request.\n"
 				+ "\t -f file		Associates the content of a file to the body HTTP POSTrequest.\n"

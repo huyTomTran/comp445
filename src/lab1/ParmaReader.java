@@ -1,19 +1,19 @@
 package lab1;
 
-import java.util.*;
+
 
 public class ParmaReader {
- 
+
 	private String parma[];
 	private boolean isHttpcCheck = false;
-	private boolean isView = false;
+	private boolean isVerbose = false;
 	private boolean isHelp = false;
-	private boolean hasKey = false;
+	//	private boolean hasKey = false;
 	private boolean isGet = false;
 	private boolean isPost = false;
 	private String URL;
 	private GetRequest getRequest;
-	
+
 	public ParmaReader(String str) {
 		super();
 		this.parma = str.split("\\s+");
@@ -31,54 +31,63 @@ public class ParmaReader {
 			//read the parma
 			for(int i=0;i<parma.length;i++) 
 			{
-				if(parma[0].equals("httpc"))
+				if(this.parma[0].equals("httpc"))
 				{
 					isHttpcCheck = true;
-				}
-	
-				if(parma[i].equals("help"))
-				{
-					int index = i;
-					int x = parma.length;
-					if(parma.length<=index+1) 
+
+					if(parma[i].equals("help"))
 					{
-						//System.out.println("just help");
-						isHelp = true;
-						Help.helpMenu();
-					}
-					else 
-					{
-						if(parma[index+1].equals("get"))
+						int index = i;
+						//						int x = parma.length;		REDUNDANT!!!
+						if(parma.length<=index+1) 
 						{
+							//System.out.println("just help");
 							isHelp = true;
-							Help.getHelpMenu();
+							Help.helpMenu();
 						}
 						else 
 						{
-							isHelp = true;
-							Help.postHelpMenu();
+							if(parma[index+1].equals("get"))
+							{
+								isHelp = true;
+								Help.getHelpMenu();
+							}
+							else 
+							{
+								isHelp = true;
+								Help.postHelpMenu();
+							}
 						}
 					}
-				}
+					/*-------END of Help class-------*/
+
+
+					// GET with Query Parameters	
+					else if(parma[i].equals("get")) 
+					{
+						isGet = true;				
+						if(parma[i].equals("-v"))
+						{
+							isVerbose = true;
+						}
+					}
+
+
+					// POST with Query Parameters	
+					else if(parma[i].equals("post")) 
+					{
+						isPost = true;
+					}
+					
+					if(parma[i].contains("http://")){
+						URL = parma[i];
+					}
+					
 				
-				if(parma[i].equals("get")) 
-				{
-					isGet = true;					
-				}
-				if(parma[i].equals("post")) 
-				{
-					isPost = true;					
-				}
-				
-				if(parma[i].contains("http://")){
-					URL = parma[i];
-				}
-				if(parma[i].equals("-v"))
-				{
-					isView = true;
+
 				}
 			}
-			
+
 			/*
 			 processing
 			 */
@@ -87,7 +96,7 @@ public class ParmaReader {
 				String url = "";
 				String parmaa = "";
 				int temp =0;
-				for(int i =0 ; i < URL.length();i++) 
+				for(int i = 0 ; i < URL.length();i++) 
 				{
 					if(URL.charAt(i)=='?') {
 						temp = i;
@@ -101,7 +110,7 @@ public class ParmaReader {
 						parmaa = "";
 					}
 				}
-				getRequest._sendRequest(url,parmaa,isView); 
+				getRequest._sendRequest(url,parmaa,isVerbose); 
 				//getRequest.sendRequest(URL); 
 			}
 			else if(isHttpcCheck == true && isPost ==true && isHelp == false && isGet == false)
@@ -112,13 +121,17 @@ public class ParmaReader {
 			{
 				isHelp = false;
 			}
+			else if (isHttpcCheck == true && (isGet == false || isPost == false))
+			{
+				System.out.println("Invalid command! Command must be \"get\" OR \"post\" after the \"httpc\"");
+			}
 			else 
 			{
-				System.out.println("Command line Error or missing http");
+				System.out.println("Command line Error. Please start with \"httpc\"");
 			}
 		}
-		
-		
+
+
 
 	}
 

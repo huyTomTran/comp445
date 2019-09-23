@@ -1,49 +1,34 @@
 package lab1;
+import java.io.IOException;
+import java.util.Scanner;
 
-import java.util.*;
-import java.net.*;
+public class Client {
 
-public class main {
+	public static void main(String[] args) throws IOException {
+		// variables declaration & initialization
+		String param="";
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		// get input from user
 		Scanner scanner = new Scanner(System.in);
-		String param ="";
-		
-		System.out.println("command");
-		
+		System.out.println("Please enter your command line");
 		param = scanner.nextLine();
-		while(!param.equals("C"))
-		{
-				try 
-				{
-					ParmaReader parmaReader = new ParmaReader(param);
-					parmaReader.getRequest();
-				}catch(Exception e) {
-					 System.out.println("Something went wrong.");
-		}
-				System.out.println("command");
-				param = scanner.nextLine();
-		}
-		System.out.println("Exit");
-		
-//		
-//		String parma [] = scanner.nextLine().split(" ");
-//		
-//		for(int i=0;i<parma.length;i++) 
-//		{
-//			if(parma[0]!="httpc") 
-//			{
-//				httpcCheck = true;
-//			}
-//		}
-//		
-//		if(httpcCheck == true) 
-//		{
-//			//GetRequest getRequest = new GetRequest();
-//			//getRequest.sendRequest();	
-//		}
-// hihisa
+		while (!param.equals("q")){
+			try
+			{
+				ParmaReader parmaReader = new ParmaReader(param);
+				parmaReader.getRequest();
+			}
+			catch(Exception e)
+			{
+				System.out.println("Oops! Something went wrong! Please try again !");
+			}
+			System.out.println("\nPlease enter your command line");
+			param = scanner.nextLine();
+		} 	
+		scanner.close();
+
+		System.out.print("Exit. Program is terminated succesfully!");
+
 
 	}
 
