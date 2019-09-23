@@ -81,6 +81,11 @@ public class GetRequest {
 	        	System.out.println("\"headers\": {");
 	        	System.out.println("  "+host + "\n  },\n  \"url\": "+url+"?"+parma+"\n}");
 			}
+			else {
+		        	System.out.println("\"headers\": {");
+		        	System.out.println("  "+host + "\n  },\n  \"url\": "+url+"\n}");
+			}
+				
 			
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block

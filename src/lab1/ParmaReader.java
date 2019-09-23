@@ -1,7 +1,5 @@
 package lab1;
 
-
-
 public class ParmaReader {
 
 	private String parma[];
@@ -123,7 +121,7 @@ public class ParmaReader {
 			}
 			else if (isHttpcCheck == true && (isGet == false || isPost == false))
 			{
-				System.out.println("Invalid command! Command must be \"get\" OR \"post\" after the \"httpc\"");
+				System.out.println("Invalid command! Command must be \"get|post|help\" after the \"httpc\"");
 			}
 			else 
 			{
