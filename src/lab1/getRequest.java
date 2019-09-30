@@ -89,36 +89,8 @@ public class GetRequest {
 	        //Closes out buffer and writer
 	        bufRead.close();
 	        wtr.close();
-<<<<<<< HEAD
-			if(!parma.equals(""))  
-			{
-				String str [] = parma.split("&");
-				Stack <String> stack = new Stack <String>();
-				for(String a : str) {
-					stack.push(a);
-				}			
-				System.out.println(
-				"{\n"
-				+"  \"arg\": {");	
-					while(!stack.empty())
-					{
-						String temp [] = stack.pop().split("=");
-						System.out.println("    \""+temp[0]+"\" : "+"\""+temp[1]+"\"");
-					}
-				System.out.println("  },");
-	        	System.out.println("\"headers\": {");
-	        	System.out.println("  "+host + "\n  },\n  \"url\": "+url+"?"+parma+"\n}");
-			}
-			else {
-		        	System.out.println("\"headers\": {");
-		        	System.out.println("  "+host + "\n  },\n  \"url\": "+url+"\n}");
-			}
-				
-			
-=======
 
 	        
->>>>>>> bf03b52... Merge pull request #6 from huyTomTran/test
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

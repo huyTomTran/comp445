@@ -1,8 +1,6 @@
 package lab1;
 //https://examples.javacodegeeks.com/core-java/net/socket/send-http-post-request-with-socket/
 
-<<<<<<< HEAD
-=======
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.io.BufferedReader;
@@ -14,7 +12,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 
->>>>>>> bf03b52... Merge pull request #6 from huyTomTran/test
 public class ParmaReader {
 
 	private String parma[];
@@ -273,7 +270,7 @@ public class ParmaReader {
 			}
 			else if (isHttpcCheck == true && (isGet == false || isPost == false))
 			{
-				System.out.println("Invalid command! Command must be \"get|post|help\" after the \"httpc\"");
+				System.out.println("Invalid command! Command must be \"get\" OR \"post\" after the \"httpc\"");
 			}
 			else 
 			{
