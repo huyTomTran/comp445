@@ -14,33 +14,51 @@ public class GetRequest {
 		
 	}
 	
-	public void _sendRequest(String url, String parma, Boolean isView) 
+	public void sendGetRequest(String url, String param, Boolean isVerbose) 
 	{
-
-		//delete http:// for socket
-		String tempURL = url.substring(7, url.length());
-		
 		try {
-			Socket socket = new Socket(tempURL, 80);
+			String tempURL = url;
+			Socket socket = new Socket(url, 80);
 			
 
 			PrintWriter wtr = new PrintWriter(socket.getOutputStream());
 	        //Prints the request string to the output stream
-				String get = "GET / HTTP/1.1";
-				String host = "Host: "+tempURL;
-	
+			String query ="";
 			
+			if(param!=null) 
+			{
+				query = "Get /get?" + param +" HTTP/1.1\r\n"+ "Host: " + tempURL +"\r\n";  
+			}
+			else
+			{
+				query = "Get / HTTP/1.1\r\n"+ "Host: " + tempURL +"\r\n";  
+			}
+			
+			if(ParmaReader.hasHead)
+			{
+				for(String key : ParmaReader.contentMap.keySet()) 
+				{
+					query = query + key + ": " + ParmaReader.contentMap.get(key) + "\r\n";
+				}
+				query = query +"\r\n"; 
+			}
+			else
+			{
+				query = query +"\r\n"; 
+			}
+	
 	        //Create a server request	
-	        wtr.println(get);
-	        wtr.println(host);
+	       // wtr.println(get);
+	        //wtr.println(host);
+			wtr.println(query);
 	        wtr.println("");
 	        wtr.flush();
 	        
 	        //observe the request on console
-	        if(isView)
+	        if(isVerbose)
 	        {
-		        System.out.println(get);
-		        System.out.println(host);
+		        System.out.print(query+"\r\n");
+		       
 		        System.out.println("");
 	        }
 
@@ -48,20 +66,30 @@ public class GetRequest {
 	        //Creates a BufferedReader that contains the server response
 	        BufferedReader bufRead = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 	        String outStr;
-	        if(isView) {
+	        if(isVerbose) {
 		        //Prints each line of the response 
 		        while((outStr = bufRead.readLine()) != null){
 		            System.out.println(outStr);
-		            if(outStr.equals("0")||outStr.equals("</body>"))
-		            {
-		            	break;
-		            }
 	        }
 	        }
-	        //System.out.println("train is big");
+	        else
+	        {
+		        //Prints each line of the response 
+		        while((outStr = bufRead.readLine()) != null){
+		        	if((outStr.contains("{")||outStr.contains("\"")||outStr.contains("}"))) 
+		        	{
+			            System.out.println(outStr);
+				            if(outStr.equals("0")||outStr.equals("</body>"))
+				            {
+				            	break;
+				            }
+			        	}
+		        }
+	        }
 	        //Closes out buffer and writer
 	        bufRead.close();
 	        wtr.close();
+<<<<<<< HEAD
 			if(!parma.equals(""))  
 			{
 				String str [] = parma.split("&");
@@ -87,6 +115,10 @@ public class GetRequest {
 			}
 				
 			
+=======
+
+	        
+>>>>>>> bf03b52... Merge pull request #6 from huyTomTran/test
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -95,9 +127,6 @@ public class GetRequest {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
 	
 	
 	public void sendRequest (String str) {
@@ -118,9 +147,9 @@ public class GetRequest {
 	        wtr.flush();
 	        
 	        //observe the request on console
-	        System.out.println(get);
-	        System.out.println(host);
-	        System.out.println("");
+	        System.out.print(get+"\r\n");
+	        System.out.print(host+"\r\n");
+	        System.out.print("\r\n");
 
 	        //Creates a BufferedReader that contains the server response
 	        BufferedReader bufRead = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -134,7 +163,6 @@ public class GetRequest {
 	            	break;
 	            }
 	        }
-	        //System.out.println("train is big");
 	        //Closes out buffer and writer
 	        bufRead.close();
 	        wtr.close();
@@ -149,6 +177,7 @@ public class GetRequest {
 		
 		
 	}
+	
 	
 	
 	
