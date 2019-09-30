@@ -2,7 +2,7 @@ package lab1;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Client {
+public class httpc {
 
 	public static void main(String[] args) throws IOException {
 		// variables declaration & initialization
