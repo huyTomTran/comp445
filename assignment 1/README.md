@@ -1,1 +1,2 @@
-# comp445
+# Assignment 1
+## HTTP Client
